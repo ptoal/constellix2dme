@@ -1,0 +1,94 @@
+{% set ns = namespace(test="var") %}
+{% set testvar = "Hello" %}
+$ORIGIN {{ name }}
+$TTL {{ soa.ttl }}
+@	SOA	{{ soa.primaryNameserver }}	{{ soa.email }} (
+		{{ soa.serial }}
+		{{ soa.refresh }}
+		{{ soa.retry }}
+		{{ soa.expire }}
+		{{ soa.ttl }} )
+;
+;
+                IN  NS    dns1.example.com.
+                IN  NS    dns2.example.com.
+{% for record in domainGtdRegions[0].aRecordsOwn -%}
+{% if "roundRobin" in record.recordOption -%}
+{% for entry in record.roundRobin -%}
+{% if not entry.disableFlag -%}
+{{ "%-12s" | format(record.name,) }}    IN  A     {{ entry.value }} 
+{% endif -%}
+{% endfor -%}
+{% endif -%}
+{% endfor -%}
+
+{% for record in domainGtdRegions[0].aaaaRecordsOwn -%}
+{% if "roundRobin" in record.recordOption -%}
+{% for entry in record.roundRobin -%}
+{% if not entry.disableFlag -%}
+{{ "%-12s" | format(record.name,) }}    IN  AAAA  {{ entry.value }} 
+{% endif -%}
+{% endfor -%}
+{% endif -%}
+{% endfor -%}
+
+{% for record in domainGtdRegions[0].mxRecordsOwn -%}
+{% if "roundRobin" in record.recordOption -%}
+{% for entry in record.roundRobin -%}
+{% if not entry.disableFlag -%}
+{{ "%-12s" | format(record.name,) }}    IN  MX {{entry.level}} {{ entry.value }} 
+{% endif -%}
+{% endfor -%}
+{% endif -%}
+{% endfor -%}
+
+{% for record in domainGtdRegions[0].spfRecordsOwn -%}
+{% if "roundRobin" in record.recordOption -%}
+{% for entry in record.roundRobin -%}
+{% if not entry.disableFlag -%}
+{{ "%-12s" | format(record.name,) }}    IN  TXT   {{ entry.value }} 
+{% endif -%}
+{% endfor -%}
+{% endif -%}
+{% endfor -%}
+
+{% for record in domainGtdRegions[0].txtRecordsOwn -%}
+{% if "roundRobin" in record.recordOption -%}
+{% for entry in record.roundRobin -%}
+{% if not entry.disableFlag -%}
+{{ "%-12s" | format(record.name,) }}    IN  TXT   {{ entry.value }} 
+{% endif -%}
+{% endfor -%}
+{% endif -%}
+{% endfor -%}
+
+
+{% for record in domainGtdRegions[0].cnameRecordsOwn -%}
+{{ "%-12s" | format(record.name,) }}    IN  CNAME {{ record.host }} 
+{% endfor -%}
+
+{# dns1	A	10.0.1.1
+	AAAA	aaaa:bbbb::1
+dns2	A	10.0.1.2
+	AAAA	aaaa:bbbb::2
+;
+;
+@	MX	10	mail.example.com.
+	MX	20	mail2.example.com.
+mail	A	10.0.1.5
+	AAAA	aaaa:bbbb::5
+mail2	A	10.0.1.6
+	AAAA	aaaa:bbbb::6
+;
+;
+; This sample zone file illustrates sharing the same IP addresses for multiple services:
+;
+services	A	10.0.1.10
+		AAAA	aaaa:bbbb::10
+		A	10.0.1.11
+		AAAA	aaaa:bbbb::11
+
+ftp	CNAME	services.example.com.
+www	CNAME	services.example.com.
+;
+;#}
