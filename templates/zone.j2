@@ -13,7 +13,7 @@ $TTL {{ soa.ttl }}
 {% if "roundRobin" in record.recordOption -%}
 {% for entry in record.roundRobin -%}
 {% if not entry.disableFlag -%}
-{{ "%-12s" | format(record.name|default("@",true),) }} {{ entry.ttl }}  IN  A     {{ entry.value }} 
+{{ "%-12s" | format(record.name|default("@",true),) }} {{ record.ttl }}  IN  A     {{ entry.value }} 
 {% endif -%}
 {% endfor -%}
 {% endif -%}
@@ -23,7 +23,7 @@ $TTL {{ soa.ttl }}
 {% if "roundRobin" in record.recordOption -%}
 {% for entry in record.roundRobin -%}
 {% if not entry.disableFlag -%}
-{{ "%-12s" | format(record.name|default("@",true),) }} {{ entry.ttl }} IN  AAAA  {{ entry.value }} 
+{{ "%-12s" | format(record.name|default("@",true),) }} {{ record.ttl }} IN  AAAA  {{ entry.value }} 
 {% endif -%}
 {% endfor -%}
 {% endif -%}
@@ -33,7 +33,7 @@ $TTL {{ soa.ttl }}
 {% if "roundRobin" in record.recordOption -%}
 {% for entry in record.roundRobin -%}
 {% if not entry.disableFlag -%}
-{{ "%-12s" | format(record.name|default("@",true),) }} IN  MX {{entry.level}} {{ entry.value }} 
+{{ "%-12s" | format(record.name|default("@",true),) }} {{ record.ttl }} IN  MX {{entry.level}} {{ entry.value }} 
 {% endif -%}
 {% endfor -%}
 {% endif -%}
@@ -43,7 +43,7 @@ $TTL {{ soa.ttl }}
 {% if "roundRobin" in record.recordOption -%}
 {% for entry in record.roundRobin -%}
 {% if not entry.disableFlag -%}
-{{ "%-12s" | format(record.name|default("@",true),) }} IN  TXT   {{ entry.value }} 
+{{ "%-12s" | format(record.name|default("@",true),) }} {{ record.ttl }} IN  TXT   {{ entry.value }} 
 {% endif -%}
 {% endfor -%}
 {% endif -%}
@@ -53,7 +53,7 @@ $TTL {{ soa.ttl }}
 {% if "roundRobin" in record.recordOption -%}
 {% for entry in record.roundRobin -%}
 {% if not entry.disableFlag -%}
-{{ "%-12s" | format(record.name|default("@",true),) }} {{ entry.ttl }} IN  TXT   {{ entry.value }} 
+{{ "%-12s" | format(record.name|default("@",true),) }} {{ record.ttl }} IN  TXT   {{ entry.value }} 
 {% endif -%}
 {% endfor -%}
 {% endif -%}
@@ -64,7 +64,7 @@ $TTL {{ soa.ttl }}
 {% if "roundRobin" in record.recordOption -%}
 {% for entry in record.roundRobin -%}
 {% if not entry.disableFlag -%}
-{{ "%-12s" | format(record.name|default("@",true),) }} {{ entry.ttl }} IN  SRV {{ entry.priority }} {{ entry.weight }} {{ entry.port }} {{ entry.value }} 
+{{ "%-12s" | format(record.name|default("@",true),) }} {{ record.ttl }} IN  SRV {{ entry.priority }} {{ entry.weight }} {{ entry.port }} {{ entry.value }} 
 {% endif -%}
 {% endfor -%}
 {% endif -%}
