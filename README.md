@@ -32,7 +32,11 @@ Currently processes the following record types:
 ./ constellix2dme.py # Process all .json files in current directory, writing <filename>.zone output
 
 ### Options
- -i / --infile Specify a file to process (can be used multiple times)
- --indir       Specify a directory to look for .json files
- --outdir      Specify output directory (default is current directory)
- -d            Debugging
+
+-i / --infile Specify a file to process (can be used multiple times)
+
+--indir       Specify a directory to look for .json files
+
+--outdir      Specify output directory (default is current directory)
+
+-d            Debugging
