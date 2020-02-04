@@ -71,5 +71,5 @@ $TTL {{ soa.ttl }}
 {% endfor -%}
 
 {% for record in domainGtdRegions[0].cnameRecordsOwn -%}
-{{ "%-12s" | format(record.name|default("@",true),) }} {{ record.ttl }} IN  CNAME {{ record.host }} 
+{{ "%-12s" | format(record.name|default("@",true),) }} {{ record.ttl }} IN  CNAME {{ record.host|default("@",true) }} 
 {% endfor -%}
