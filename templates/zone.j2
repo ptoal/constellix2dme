@@ -15,7 +15,7 @@ $TTL {{ soa.ttl }}
 {% if "roundRobin" in record.recordOption -%}
 {% for entry in record.roundRobin -%}
 {% if not entry.disableFlag -%}
-{{ "%-12s" | format(record.name,) }}    IN  A     {{ entry.value }} 
+{{ "%-12s" | format(record.name,) }} {{ entry.ttl }}  IN  A     {{ entry.value }} 
 {% endif -%}
 {% endfor -%}
 {% endif -%}
@@ -25,7 +25,7 @@ $TTL {{ soa.ttl }}
 {% if "roundRobin" in record.recordOption -%}
 {% for entry in record.roundRobin -%}
 {% if not entry.disableFlag -%}
-{{ "%-12s" | format(record.name,) }}    IN  AAAA  {{ entry.value }} 
+{{ "%-12s" | format(record.name,) }} {{ entry.ttl }} IN  AAAA  {{ entry.value }} 
 {% endif -%}
 {% endfor -%}
 {% endif -%}
@@ -35,7 +35,7 @@ $TTL {{ soa.ttl }}
 {% if "roundRobin" in record.recordOption -%}
 {% for entry in record.roundRobin -%}
 {% if not entry.disableFlag -%}
-{{ "%-12s" | format(record.name,) }}    IN  MX {{entry.level}} {{ entry.value }} 
+{{ "%-12s" | format(record.name,) }} {{ entry.ttl }} IN  MX {{entry.level}} {{ entry.value }} 
 {% endif -%}
 {% endfor -%}
 {% endif -%}
@@ -45,7 +45,7 @@ $TTL {{ soa.ttl }}
 {% if "roundRobin" in record.recordOption -%}
 {% for entry in record.roundRobin -%}
 {% if not entry.disableFlag -%}
-{{ "%-12s" | format(record.name,) }}    IN  TXT   {{ entry.value }} 
+{{ "%-12s" | format(record.name,) }} {{ entry.ttl }} IN  TXT   {{ entry.value }} 
 {% endif -%}
 {% endfor -%}
 {% endif -%}
@@ -55,7 +55,7 @@ $TTL {{ soa.ttl }}
 {% if "roundRobin" in record.recordOption -%}
 {% for entry in record.roundRobin -%}
 {% if not entry.disableFlag -%}
-{{ "%-12s" | format(record.name,) }}    IN  TXT   {{ entry.value }} 
+{{ "%-12s" | format(record.name,) }} {{ entry.ttl }} IN  TXT   {{ entry.value }} 
 {% endif -%}
 {% endfor -%}
 {% endif -%}
@@ -63,5 +63,5 @@ $TTL {{ soa.ttl }}
 
 
 {% for record in domainGtdRegions[0].cnameRecordsOwn -%}
-{{ "%-12s" | format(record.name,) }}    IN  CNAME {{ record.host }} 
+{{ "%-12s" | format(record.name,) }} {{ record.ttl }} IN  CNAME {{ record.host }} 
 {% endfor -%}
