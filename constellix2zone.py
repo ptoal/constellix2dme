@@ -18,7 +18,7 @@ def main():
     parser.add_argument("--indir", help="Directory containing json zone files from Constellix")
     parser.add_argument("-i", "--infile", help="Path to a single json zone file from Constellix", action="append")
     parser.add_argument("--outdir", help="Output directory for Zone files")
-    parser.add_argument("-c","--clobber", help="Overwrite existing files")
+    parser.add_argument("-c","--clobber", help="Overwrite existing files", action="store_true")
     parser.add_argument("-d", "--debug", action="store_true")
 
     # parse the arguments
