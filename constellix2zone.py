@@ -6,7 +6,7 @@ import argparse
 
 from jinja2 import Environment, PackageLoader
 env = Environment(
-    loader=PackageLoader('constellix2dme', 'templates'),
+    loader=PackageLoader('constellix2zone', 'templates'),
     extensions=['jinja2.ext.do']
 )
 
@@ -57,9 +57,10 @@ def main():
     print ("Files to process: " + " ".join(inputfiles))
 
     for file in inputfiles:
+        outfile_name = os.path.split(file)[1]
+        outfile_path = os.path.join(outdir, os.path.splitext(outfile_name)[0]+".zone")
 
-        outfile_path = outdir,os.path.splitext(file)[0]+".json"
-        if os.path.exists(outfile) and not clobber:
+        if os.path.exists(outfile_path) and not clobber:
             print("Error: File exists: " + outfile_path, file=sys.stderr)
             next
 
@@ -79,7 +80,7 @@ def main():
         if debug:
             print (output)        
 
-        outfile = open(os.path.join(),"w")
+        outfile = open(outfile_path,"w")
         outfile.write(output)
 
 if __name__ == "__main__":

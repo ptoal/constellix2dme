@@ -10,8 +10,7 @@ $TTL {{ soa.ttl }}
 		{{ soa.ttl }} )
 ;
 ;
-                IN  NS    dns1.example.com.
-                IN  NS    dns2.example.com.
+
 {% for record in domainGtdRegions[0].aRecordsOwn -%}
 {% if "roundRobin" in record.recordOption -%}
 {% for entry in record.roundRobin -%}

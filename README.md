@@ -19,7 +19,6 @@ and create Zone files that can be imported into DME.
 Currently processes the following record types:
 
 - SOA
-- NS
 - CNAME
 - A
 - AAA
