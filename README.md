@@ -1,6 +1,6 @@
-# constellix2dme
+# constellix2zone
 
-Read Constellix export files in json format and create records in DnsMadeEasy
+Read Constellix export files in json format and create BIND Zone files that can be imported into DNSMadeEasy.
 
 ## Background
 
@@ -14,6 +14,25 @@ and create Zone files that can be imported into DME.
 
 > Please note: free API calls are limited to 150 calls every five minutes. Additional API calls are priced at $325 for 150 calls every five minutes.
 
+## Notes
+
+Currently processes the following record types:
+
+- SOA
+- NS
+- CNAME
+- A
+- AAA
+- MX
+- SPF
+- TXT
+
 ## Usage
 
-./ constellix2dme.py <input_dir> <output_dir>
+./ constellix2dme.py # Process all .json files in current directory, writing <filename>.zone output
+
+### Options
+ -i / --infile Specify a file to process (can be used multiple times)
+ --indir       Specify a directory to look for .json files
+ --outdir      Specify output directory (default is current directory)
+ -d            Debugging

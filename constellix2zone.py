@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Python script to convert Constellix json files to DME Zone files
 
-import json, os
+import json, os, sys
 import argparse
 
 from jinja2 import Environment, PackageLoader
@@ -18,12 +18,14 @@ def main():
     parser.add_argument("--indir", help="Directory containing json zone files from Constellix")
     parser.add_argument("-i", "--infile", help="Path to a single json zone file from Constellix", action="append")
     parser.add_argument("--outdir", help="Output directory for Zone files")
+    parser.add_argument("-c","--clobber", help="Overwrite existing files")
     parser.add_argument("-d", "--debug", action="store_true")
 
     # parse the arguments
     args = parser.parse_args()
 
     debug=args.debug
+    clobber=args.clobber
 
     if args.indir:
         indir=args.indir
@@ -55,6 +57,12 @@ def main():
     print ("Files to process: " + " ".join(inputfiles))
 
     for file in inputfiles:
+
+        outfile_path = outdir,os.path.splitext(file)[0]+".json"
+        if os.path.exists(outfile) and not clobber:
+            print("Error: File exists: " + outfile_path, file=sys.stderr)
+            next
+
         handle = open(os.path.join(indir, file),'r')
         zone_data = json.load(handle)
 
@@ -68,7 +76,11 @@ def main():
         zone_context = zone_template.new_context(zone_data)
         output = zone_template.render(zone_context)
 
-        print (output)
+        if debug:
+            print (output)        
+
+        outfile = open(os.path.join(),"w")
+        outfile.write(output)
 
 if __name__ == "__main__":
     # execute only if run as a script
