@@ -19,6 +19,7 @@ def main():
     parser.add_argument("-i", "--infile", help="Path to a single json zone file from Constellix", action="append")
     parser.add_argument("--outdir", help="Output directory for Zone files")
     parser.add_argument("-c","--clobber", help="Overwrite existing files", action="store_true")
+    parser.add_argument("-n", help="Don't create files.  Just write to stdout", action="store_true")
     parser.add_argument("-d", "--debug", action="store_true")
 
     # parse the arguments
@@ -26,6 +27,7 @@ def main():
 
     debug=args.debug
     clobber=args.clobber
+    nowrite=args.n
 
     if args.indir:
         indir=args.indir
@@ -77,11 +79,12 @@ def main():
         zone_context = zone_template.new_context(zone_data)
         output = zone_template.render(zone_context)
 
-        if debug:
-            print (output)        
-
-        outfile = open(outfile_path,"w")
-        outfile.write(output)
+        if debug or nowrite:
+            print (output) 
+                   
+        if not nowrite:
+            outfile = open(outfile_path,"w")
+            outfile.write(output)
 
 if __name__ == "__main__":
     # execute only if run as a script
