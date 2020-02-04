@@ -14,6 +14,12 @@ and create Zone files that can be imported into DME.
 
 > Please note: free API calls are limited to 150 calls every five minutes. Additional API calls are priced at $325 for 150 calls every five minutes.
 
+## Installation
+
+Clone the repository to a local directory.  eg: `git clone https://github.com/ptoal/constellix2zone`
+
+Install the requirements (Currently only Jinja2). eg: `pip install -r requirements.txt`
+
 ## Notes
 
 Currently processes the following record types:
