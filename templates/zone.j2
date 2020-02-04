@@ -62,6 +62,16 @@ $TTL {{ soa.ttl }}
 {% endfor -%}
 
 
+{% for record in domainGtdRegions[0].srvRecordsOwn -%}
+{% if "roundRobin" in record.recordOption -%}
+{% for entry in record.roundRobin -%}
+{% if not entry.disableFlag -%}
+{{ "%-12s" | format(record.name,) }} {{ entry.ttl }} IN  SRV {{ entry.priority }} {{ entry.weight }} {{ entry.port }} {{ entry.value }} 
+{% endif -%}
+{% endfor -%}
+{% endif -%}
+{% endfor -%}
+
 {% for record in domainGtdRegions[0].cnameRecordsOwn -%}
 {{ "%-12s" | format(record.name,) }} {{ record.ttl }} IN  CNAME {{ record.host }} 
 {% endfor -%}

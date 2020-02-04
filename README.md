@@ -25,6 +25,7 @@ Currently processes the following record types:
 - MX
 - SPF
 - TXT
+- SRV
 
 ## Usage
 
@@ -39,3 +40,7 @@ Currently processes the following record types:
 --outdir      Specify output directory (default is current directory)
 
 -d            Debugging
+
+-c            Clobber (overwrite) existing files
+
+-n            Don't write files.  Just dump to stdout
